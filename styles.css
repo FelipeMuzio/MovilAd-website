@@ -136,6 +136,19 @@ body {
     /* opcional para efecto moderno */
 }
 
+.hero-banner-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(16, 200, 117, 0.25); /* verde claro translúcido */
+  color: white;
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  backdrop-filter: blur(3px);
+}
 
 .cta-button {
     display: inline-block;
@@ -219,6 +232,44 @@ body {
 .feature-card p {
     color: #666;
     line-height: 1.6;
+}
+
+.split-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    min-height: 500px;
+}
+
+.left-column,
+.right-column {
+    flex: 1;
+    padding: 3rem;
+}
+
+/* Estilos opcionales para diferenciar visualmente */
+.left-column {
+    background-color: #D5FF88;
+}
+
+.right-column {
+    background-color: #10C875;
+    border-left: 1px solid #ddd;
+}
+
+/* Responsive: en móvil, columnas una debajo de otra */
+@media (max-width: 768px) {
+    .split-section {
+        flex-direction: column;
+    }
+
+    .left-column,
+    .right-column {
+        border-left: none;
+        border-top: 1px solid #ddd;
+    }
 }
 
 /* Contact Section */
