@@ -46,6 +46,11 @@ body {
     color: #10C875;
 }
 
+.logo-link {
+    margin-left: -10rem;
+}
+
+
 .nav-links {
     display: flex;
     list-style: none;
