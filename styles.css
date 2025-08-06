@@ -18,7 +18,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: #014734;
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
@@ -59,7 +59,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: #FFFFFF;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -71,12 +71,10 @@ body {
 /* Hero Section */
 .hero {
     background-image: url('img/ImagenFondo.png');
-    /* Asegurate que el nombre del archivo sea correcto */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
-    /* Altura mínima de toda la pantalla */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +90,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Oscurecer para mejor contraste */
     z-index: 1;
 }
 
@@ -129,11 +126,9 @@ body {
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(16, 200, 117, 0.3);
-    /* verde claro translúcido */
     padding: 1rem 1.5rem;
     border-radius: 10px;
     backdrop-filter: blur(3px);
-    /* opcional para efecto moderno */
 }
 
 .hero-banner-text {
@@ -141,7 +136,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(16, 200, 117, 0.25); /* verde claro translúcido */
+  background: rgba(16, 200, 117, 0.25);
   color: white;
   text-align: center;
   padding: 1.2rem;
