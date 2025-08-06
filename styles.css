@@ -119,30 +119,18 @@ body {
 }
 
 .hero p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 2rem;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(16, 200, 117, 0.3);
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    backdrop-filter: blur(3px);
-}
-
-.hero-banner-text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(16, 200, 117, 0.25);
-  color: white;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  backdrop-filter: blur(3px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #D5FF88;
+    color: #014734;
+    text-align: center;
+    padding: 1.2rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    z-index: 3;
 }
 
 .cta-button {
