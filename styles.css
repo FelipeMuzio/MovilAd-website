@@ -235,10 +235,12 @@ body {
 /* Estilos opcionales para diferenciar visualmente */
 .left-column {
     background-color: #D5FF88;
+    color: #014734;
 }
 
 .right-column {
-    background-color: #10C875;
+    background-color: #014734;
+    color: #D5FF88;
     border-left: 1px solid #ddd;
 }
 
