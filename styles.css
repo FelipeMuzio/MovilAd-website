@@ -196,7 +196,7 @@ body {
 .feature-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #D5FF88, #10C875);
+    background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
