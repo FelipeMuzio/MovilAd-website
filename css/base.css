@@ -35,6 +35,11 @@ body {
     color: #333;
 }
 
+/* Scroll automatico */
+#split-section {
+    scroll-margin-top: 89px;
+}
+
 @media (max-width: 768px) {
     .section-title {
         font-size: 2rem;
