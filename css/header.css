@@ -1,0 +1,58 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #014734;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #333;
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.logo .ad {
+    color: #10C875;
+}
+
+.logo-link {
+    margin-left: -10rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #10C875;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+}
