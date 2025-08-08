@@ -38,9 +38,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Header scroll effect
-
-
 // Animate elements on scroll
 const observerOptions = {
     threshold: 0.1,
