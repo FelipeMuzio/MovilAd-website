@@ -2,26 +2,34 @@
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Get form data
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    // Simulate form submission
-    const submitBtn = this.querySelector('.submit-btn');
+    const form = this;
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
 
     submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
 
-    setTimeout(() => {
-        alert('¡Gracias por contactarnos! Te responderemos pronto.');
-        this.reset();
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alert('¡Gracias por contactarnos! Te responderemos pronto.');
+            form.reset();
+        } else {
+            alert('Ocurrió un error al enviar el mensaje. Por favor, intenta nuevamente.');
+        }
+    }).catch(error => {
+        alert('Error de conexión. Por favor, verifica tu conexión a Internet.');
+        console.error(error);
+    }).finally(() => {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-    }, 1500);
+    });
 });
 
 // Smooth scroll for navigation links
