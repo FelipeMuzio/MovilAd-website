@@ -25,6 +25,17 @@
     border-left: 1px solid #ddd;
 }
 
+.pautar-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #014734;
+    color: #D5FF88;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
 /* Responsive: en móvil, columnas una debajo de otra */
 @media (max-width: 768px) {
     .split-section {
