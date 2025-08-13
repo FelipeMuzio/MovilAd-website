@@ -15,6 +15,22 @@
     color: #10C875;
 }
 
-.footer-social {
-    margin-top: 1rem;
+.whatsapp-fijo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }
+
+.whatsapp-fijo img {
+    width: 75px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-fijo img:hover {
+    transform: scale(1.1);
+}
+
