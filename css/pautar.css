@@ -11,6 +11,7 @@
 .right-column {
     flex: 1;
     padding: 3rem;
+    text-align: center;
 }
 
 /* Estilos opcionales para diferenciar visualmente */
