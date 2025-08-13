@@ -33,7 +33,13 @@
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pautar-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 200, 117, 0.3);
 }
 
 /* Responsive: en móvil, columnas una debajo de otra */
