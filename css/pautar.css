@@ -1,17 +1,36 @@
 .split-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     width: 100%;
-    min-height: 500px;
+    height: 100vh;
 }
 
 .left-column,
 .right-column {
-    flex: 1;
+    flex: 0 0 50%;
+    max-width: 50%;
+    min-width: 0;
     padding: 3rem;
-    text-align: center;
+    text-align: justify;
+    overflow-y: auto;
+}
+
+.left-column h2,
+.right-column h2 {
+    margin-bottom: 1rem;
+}
+
+.left-column p,
+.right-column p {
+    margin-bottom: 1rem;
+}
+
+.left-column ul,
+.right-column ul {
+    margin-bottom: 1.5rem;
 }
 
 /* Estilos opcionales para diferenciar visualmente */
@@ -43,15 +62,9 @@
     box-shadow: 0 10px 25px rgba(16, 200, 117, 0.3);
 }
 
-/* Responsive: en móvil, columnas una debajo de otra */
+
 @media (max-width: 768px) {
     .split-section {
         flex-direction: column;
-    }
-
-    .left-column,
-    .right-column {
-        border-left: none;
-        border-top: 1px solid #ddd;
     }
 }
