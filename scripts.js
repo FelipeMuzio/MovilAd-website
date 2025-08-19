@@ -1,36 +1,55 @@
-// Form handling
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+// Form handling (con diagnóstico)
+document.getElementById('contactForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
 
-    const form = this;
+  const form = this;
+  const submitBtn = form.querySelector('.submit-btn');
+  const originalText = submitBtn.textContent;
+
+  submitBtn.textContent = 'Enviando...';
+  submitBtn.disabled = true;
+
+  try {
+    // Tomamos datos y los mandamos como JSON
     const formData = new FormData(form);
-    const submitBtn = form.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
+    const payload = Object.fromEntries(formData.entries());
 
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.disabled = true;
-
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            alert('¡Gracias por contactarnos! Te responderemos pronto.');
-            form.reset();
-        } else {
-            alert('Ocurrió un error al enviar el mensaje. Por favor, intenta nuevamente.');
-        }
-    }).catch(error => {
-        alert('Error de conexión. Por favor, verifica tu conexión a Internet.');
-        console.error(error);
-    }).finally(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' // clave para JSON
+      },
+      body: JSON.stringify(payload)
     });
+
+    // Intentamos leer el cuerpo (texto) para log y/o parseo
+    const text = await response.text();
+    let data = null;
+    try { data = JSON.parse(text); } catch (_) {}
+
+    console.log('Status:', response.status);
+    console.log('Raw response:', text);
+
+    if (response.ok) {
+      alert('¡Gracias por contactarnos! Te responderemos pronto.');
+      form.reset();
+    } else {
+      // Formspree suele devolver { errors: [{ message: '...' }]}
+      const msg = data?.errors?.map(e => e.message).join(' | ')
+                || data?.message
+                || 'Ocurrió un error al enviar el mensaje.';
+      alert(`${msg}\n(Status: ${response.status})`);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error de conexión. Por favor, verifica tu conexión a Internet.');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 });
+\
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
