@@ -49,7 +49,6 @@ document.getElementById('contactForm').addEventListener('submit', async function
     submitBtn.disabled = false;
   }
 });
-\
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
