@@ -15,6 +15,19 @@ function closeThankyouModal() {
     document.body.style.overflow = '';
 }
 
+function validateName(nombreInput) {
+    const nombre = nombreInput.value.trim();
+    const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+    if (!regex.test(nombre)) {
+        nombreInput.setCustomValidity("El nombre no puede contener números ni caracteres especiales.");
+        return false;
+    } else {
+        nombreInput.setCustomValidity(""); // limpia el error si es válido
+        return true;
+    }
+}
+
 document.addEventListener('click', (e) => {
     if (e.target.matches('[data-close-modal]')) closeThankyouModal();
 });
@@ -29,6 +42,13 @@ document.getElementById('contactForm')?.addEventListener('submit', async functio
     const formData = new FormData(form);
     const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn ? submitBtn.textContent : null;
+    const nombreInput = this.querySelector("input[name='nombre']");
+    
+    if (!validarNombre(nombreInput)) {
+        e.preventDefault(); // bloquea el envío
+        nombreInput.reportValidity(); // muestra el popup nativo del navegador
+        nombreInput.focus();
+    }
 
     if (submitBtn) {
         submitBtn.textContent = 'Enviando...';
