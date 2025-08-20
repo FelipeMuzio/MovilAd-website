@@ -66,3 +66,12 @@
 .icon-img{
     border-radius: 50%;
 }
+
+.about p {
+    text-align: center; 
+    font-size: 1.2rem; 
+    color: #666; 
+    max-width: 800px; 
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
