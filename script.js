@@ -73,7 +73,31 @@ function initForm() {
     if (!form) return;
 
     form.addEventListener('submit', handleFormSubmit);
+    
+    // Agregar validación en tiempo real para el campo nombre
+    const nameInput = form.querySelector('input[name="name"]');
+    if (nameInput) {
+        nameInput.addEventListener('input', validateNameInput);
+        nameInput.addEventListener('blur', validateNameInput);
+    }
+    
     console.log('Formulario inicializado');
+}
+
+// Función para validar el input de nombre en tiempo real
+function validateNameInput(e) {
+    const nameInput = e.target;
+    const name = nameInput.value.trim();
+    const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/; // Permitir vacío también
+    
+    if (name === '') {
+        // Si está vacío, limpiar validación personalizada (HTML5 se encarga del required)
+        nameInput.setCustomValidity('');
+    } else if (!nameRegex.test(name)) {
+        nameInput.setCustomValidity('El nombre no puede contener números ni caracteres especiales.');
+    } else {
+        nameInput.setCustomValidity('');
+    }
 }
 
 async function handleFormSubmit(e) {
@@ -228,11 +252,6 @@ function initAnimations() {
     
     console.log('Animaciones inicializadas para', elements.length, 'elementos');
 }
-
-// =============================================================================
-// VALIDACIONES DEL FORMS
-// =============================================================================
-
 
 // =============================================================================
 // FUNCIONES GLOBALES (para compatibilidad si las necesitas)
