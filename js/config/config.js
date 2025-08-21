@@ -1,7 +1,0 @@
-export const CONFIG = {
-    FORM_TIMEOUT: 15000,
-    SCROLL_BEHAVIOR: 'smooth',
-    ANIMATION_DURATION: 0.8,
-    OBSERVER_THRESHOLD: 0.1,
-    OBSERVER_ROOT_MARGIN: '0px 0px -50px 0px'
-};
