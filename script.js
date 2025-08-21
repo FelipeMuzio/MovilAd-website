@@ -81,6 +81,13 @@ function initForm() {
         nameInput.addEventListener('blur', validateNameInput);
     }
     
+    // Agregar validación en tiempo real para el campo teléfono
+    const phoneInput = form.querySelector('input[name="phone"]') || form.querySelector('input[name="telefono"]');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', validatePhoneInput);
+        phoneInput.addEventListener('blur', validatePhoneInput);
+    }
+    
     console.log('Formulario inicializado');
 }
 
@@ -97,6 +104,22 @@ function validateNameInput(e) {
         nameInput.setCustomValidity('El nombre no puede contener números ni caracteres especiales.');
     } else {
         nameInput.setCustomValidity('');
+    }
+}
+
+// Función para validar el input de teléfono en tiempo real
+function validatePhoneInput(e) {
+    const phoneInput = e.target;
+    const phone = phoneInput.value.trim();
+    const phoneRegex = /^[0-9+\s]*$/; // Solo números, el signo + y espacios
+    
+    if (phone === '') {
+        // Si está vacío, limpiar validación personalizada (HTML5 se encarga del required)
+        phoneInput.setCustomValidity('');
+    } else if (!phoneRegex.test(phone)) {
+        phoneInput.setCustomValidity('El teléfono solo puede contener números y el signo +');
+    } else {
+        phoneInput.setCustomValidity('');
     }
 }
 
@@ -173,7 +196,9 @@ async function handleFormSubmit(e) {
 
 function validateForm(form) {
     const nameInput = form.querySelector('input[name="name"]');
+    const phoneInput = form.querySelector('input[name="phone"]') || form.querySelector('input[name="telefono"]');
     
+    // Validar nombre
     if (nameInput) {
         const name = nameInput.value.trim();
         const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
@@ -185,6 +210,21 @@ function validateForm(form) {
             return false;
         } else {
             nameInput.setCustomValidity('');
+        }
+    }
+    
+    // Validar teléfono
+    if (phoneInput) {
+        const phone = phoneInput.value.trim();
+        const phoneRegex = /^[0-9+\s]+$/;
+        
+        if (phone !== '' && !phoneRegex.test(phone)) {
+            phoneInput.setCustomValidity('El teléfono solo puede contener números y el signo +');
+            phoneInput.reportValidity();
+            phoneInput.focus();
+            return false;
+        } else {
+            phoneInput.setCustomValidity('');
         }
     }
     
