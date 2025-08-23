@@ -74,20 +74,29 @@ function initForm() {
 
     form.addEventListener('submit', handleFormSubmit);
     
-    // Agregar validación en tiempo real para el campo nombre
+    // Validación en tiempo real: nombre
     const nameInput = form.querySelector('input[name="name"]');
     if (nameInput) {
         nameInput.addEventListener('input', validateNameInput);
         nameInput.addEventListener('blur', validateNameInput);
     }
-    
-    // Agregar validación en tiempo real para el campo teléfono
+
+    // Validación en tiempo real: teléfono
     const phoneInput = form.querySelector('input[name="phone"]') || form.querySelector('input[name="telefono"]');
     if (phoneInput) {
         phoneInput.addEventListener('input', validatePhoneInput);
         phoneInput.addEventListener('blur', validatePhoneInput);
     }
-    
+
+    // =========================
+    // NUEVO: Validación email
+    // =========================
+    const emailInput = form.querySelector('input[name="email"]');
+    if (emailInput) {
+        emailInput.addEventListener('input', validateEmailInput);
+        emailInput.addEventListener('blur', validateEmailInput);
+    }
+
     console.log('Formulario inicializado');
 }
 
@@ -98,8 +107,7 @@ function validateNameInput(e) {
     const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/; // Permitir vacío también
     
     if (name === '') {
-        // Si está vacío, limpiar validación personalizada (HTML5 se encarga del required)
-        nameInput.setCustomValidity('');
+        nameInput.setCustomValidity(''); // HTML5 maneja required si corresponde
     } else if (!nameRegex.test(name)) {
         nameInput.setCustomValidity('El nombre no puede contener números ni caracteres especiales.');
     } else {
@@ -114,12 +122,27 @@ function validatePhoneInput(e) {
     const phoneRegex = /^[0-9+\s]*$/; // Solo números, el signo + y espacios
     
     if (phone === '') {
-        // Si está vacío, limpiar validación personalizada (HTML5 se encarga del required)
         phoneInput.setCustomValidity('');
     } else if (!phoneRegex.test(phone)) {
         phoneInput.setCustomValidity('El teléfono solo puede contener números y el signo +');
     } else {
         phoneInput.setCustomValidity('');
+    }
+}
+
+// =========================
+// NUEVO: Validación email
+// =========================
+function validateEmailInput(e) {
+    const input = e.target;
+    const v = input.value.trim();
+    // Requiere: algo@algo.algo (TLD >= 2)
+    const re = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+
+    if (v === '' || re.test(v)) {
+        input.setCustomValidity('');
+    } else {
+        input.setCustomValidity('Ingresa un email válido (usuario@dominio.com).');
     }
 }
 
@@ -149,7 +172,7 @@ async function handleFormSubmit(e) {
     const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
-        // Enviar formulario
+        // Enviar formulario (mantengo tu envío JSON tal cual)
         const response = await fetch(form.action, {
             method: 'POST',
             headers: {
@@ -162,19 +185,16 @@ async function handleFormSubmit(e) {
 
         console.log('Respuesta del servidor:', response.status);
 
-        // Manejar respuesta
+        // Manejar respuesta (se deja igual que tu versión)
         if (response.ok) {
-            // Éxito
             console.log('Formulario enviado exitosamente');
             form.reset();
             openModal();
         } else if (response.status >= 400 && response.status < 500) {
-            // Error del cliente (pero probablemente Formspree procesó el formulario)
             console.log('Respuesta 4xx - asumiendo envío exitoso');
             form.reset();
             openModal();
         } else {
-            // Error del servidor
             throw new Error(`Error del servidor: ${response.status}`);
         }
 
@@ -197,7 +217,8 @@ async function handleFormSubmit(e) {
 function validateForm(form) {
     const nameInput = form.querySelector('input[name="name"]');
     const phoneInput = form.querySelector('input[name="phone"]') || form.querySelector('input[name="telefono"]');
-    
+    const emailInput = form.querySelector('input[name="email"]'); // NUEVO
+
     // Validar nombre
     if (nameInput) {
         const name = nameInput.value.trim();
@@ -210,6 +231,20 @@ function validateForm(form) {
             return false;
         } else {
             nameInput.setCustomValidity('');
+        }
+    }
+
+    // Validar email (exigir TLD)
+    if (emailInput) {
+        const v = emailInput.value.trim();
+        const re = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+        if (!re.test(v)) {
+            emailInput.setCustomValidity('Ingresa un email válido (usuario@dominio.com).');
+            emailInput.reportValidity();
+            emailInput.focus();
+            return false;
+        } else {
+            emailInput.setCustomValidity('');
         }
     }
     
@@ -297,7 +332,6 @@ function initAnimations() {
 // FUNCIONES GLOBALES (para compatibilidad si las necesitas)
 // =============================================================================
 
-// Estas funciones están disponibles globalmente si las necesitas llamar desde el HTML
 window.openThankyouModal = openModal;
 window.closeThankyouModal = closeModal;
 
