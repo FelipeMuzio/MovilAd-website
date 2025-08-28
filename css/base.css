@@ -61,3 +61,7 @@ body {
 .fade-in-up {
     animation: fadeInUp 0.8s ease forwards;
 }
+
+:root{ --header-h: 72px; }
+body.no-scroll { overflow: hidden; }
+

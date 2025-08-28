@@ -328,6 +328,28 @@ function initAnimations() {
     console.log('Animaciones inicializadas para', elements.length, 'elementos');
 }
 
+// ====== Menú hamburguesa (solo actúa si existe) ======
+const toggleBtn = document.querySelector('.nav-toggle');
+const primaryNav = document.getElementById('primary-nav');
+
+if (toggleBtn && primaryNav) {
+  toggleBtn.addEventListener('click', () => {
+    const open = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', String(!open));
+    primaryNav.classList.toggle('is-open');
+    document.body.classList.toggle('no-scroll', !open);
+  });
+
+  // Cerrar al hacer click en un enlace
+  primaryNav.addEventListener('click', (e) => {
+    if (e.target.closest('a')) {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      primaryNav.classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+    }
+  });
+}
+
 // =============================================================================
 // FUNCIONES GLOBALES (para compatibilidad si las necesitas)
 // =============================================================================

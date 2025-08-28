@@ -56,3 +56,56 @@
         display: none;
     }
 }
+
+/* Botón hamburguesa: oculto en desktop */
+.nav-toggle{
+  display: none;
+  width: 42px; height: 36px;
+  background: transparent; border: 0; cursor: pointer; position: relative;
+}
+.nav-toggle span{
+  position: absolute; left: 8px; right: 8px; height: 3px;
+  background: #FFFFFF; border-radius: 2px; transition: .2s;
+}
+.nav-toggle span:nth-child(1){ top: 10px; }
+.nav-toggle span:nth-child(2){ top: 17px; }
+.nav-toggle span:nth-child(3){ top: 24px; }
+
+/* ===== Solo bajo 992px activamos hamburguesa ===== */
+@media (max-width: 992px){
+  .logo-link{ margin-left: 0; } /* evitar el -10rem en chico */
+  .nav-toggle{ display: inline-block; }
+
+  /* Panel desplegable */
+  #primary-nav{
+    position: fixed;
+    top: var(--header-h, 72px);
+    left: 0; right: 0;
+    background: #014734;
+    transform: translateY(-120%);
+    transition: transform .25s ease;
+    z-index: 999;
+    box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  }
+  #primary-nav.is-open{ transform: translateY(0); }
+
+  /* Lista vertical dentro del panel (pisa tu display:none) */
+  #primary-nav .nav-links{
+    display: flex !important;
+    flex-direction: column;
+    gap: .5rem;
+    list-style: none;
+    padding: .75rem 1rem 1rem;
+  }
+  #primary-nav .nav-links a{
+    display: block; padding: .6rem .75rem; border-radius: 8px;
+  }
+  #primary-nav .nav-links a:hover{
+    background: rgba(255,255,255,.08);
+  }
+
+  /* Animación icono */
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+}
