@@ -15,7 +15,13 @@
             <a href="#home" class="logo-link">
                 <img src="img/LogoLB.png" alt="MOVILAd" style="height: 50px;">
             </a>
-            <nav>
+
+            <!-- Botón hamburguesa (invisible en desktop) -->
+            <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav id="primary-nav">
                 <ul class="nav-links">
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#about">Nosotros</a></li>

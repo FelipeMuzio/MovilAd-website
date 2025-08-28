@@ -1,21 +1,18 @@
-.split-section {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 100vh;
+/* Desktop por defecto (igual que ahora) */
+.split-section{
+  display: flex; flex-direction: row; align-items: stretch;
+  justify-content: space-between; flex-wrap: nowrap;
+  width: 100%;
+  min-height: 85vh; /* más flexible que 100vh */
 }
 
-.left-column,
-.right-column {
-    flex: 0 0 50%;
-    max-width: 50%;
-    min-width: 0;
-    padding: 3rem;
-    text-align: justify;
-    overflow-y: auto;
+.left-column, .right-column{
+  flex: 0 0 50%;
+  max-width: 50%;
+  min-width: 0;
+  padding: 3rem;
+  text-align: justify;
+  overflow: auto; /* ok en desktop */
 }
 
 .left-column h2,
@@ -78,8 +75,17 @@
     box-shadow: 0 10px 25px rgba(16, 200, 117, 0.3);
 }
 
-@media (max-width: 768px) {
-    .split-section {
-        flex-direction: column;
-    }
+/* En <=992px apilamos y quitamos scroll interno */
+@media (max-width: 992px){
+  .split-section{
+    flex-direction: column;
+    min-height: auto; height: auto;
+  }
+  .left-column, .right-column{
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 1.25rem 1rem;
+    overflow: visible;    /* clave: sin barrita ni “corte” */
+    text-align: left;
+  }
 }

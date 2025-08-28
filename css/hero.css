@@ -89,3 +89,11 @@
         font-size: 1.2rem;
     }
 }
+
+@media (max-width: 992px){
+  .hero{
+    min-height: 70vh;
+    background-position: 50% 22%;
+    padding-top: calc(var(--header-h, 72px) + 12px);
+  }
+}
